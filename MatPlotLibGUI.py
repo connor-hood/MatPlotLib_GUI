@@ -10,7 +10,7 @@ def draw_line():
     plt.title("Test with MatPlotLib in PySimpleGui")
     plt.text(0.535, 0.703, "Line Graph Version")
     plt.plot(line_data)
-    plt.show(block=False)
+    plt.show()
 
 def draw_pie():
     plt.title("Test with MatPlotLib in PySimpleGui")
@@ -19,9 +19,15 @@ def draw_pie():
     plt.axis('equal')
     plt.show()
 
-layout = [[sg.Button('Plot'), sg.Button('Pie'), sg.Cancel(), sg.Button('Popup')]]
+frame_layout = [[sg.Button('Plot'), 
+           sg.Button('Pie'), 
+           sg.Cancel()]]
 
-window = sg.Window('Have some Matplotlib...', layout)
+layout = [
+    [sg.Frame('MatplotLib Plotter', frame_layout)]
+]
+
+window = sg.Window('Have some Matplotlib...', layout, finalize=True)
 
 while True:
     event, values = window.read()
@@ -31,6 +37,4 @@ while True:
         draw_line()
     elif event == 'Pie':
         draw_pie()
-    elif event == 'Popup':
-        sg.popup('Yes, your application is still running')
 window.close()
